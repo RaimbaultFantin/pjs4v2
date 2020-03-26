@@ -156,6 +156,7 @@ alter table coach
 CREATE VIEW vue_personne
 AS 
 SELECT 
+    id,
     mail, 
     prenom, 
     nom
