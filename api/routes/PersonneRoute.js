@@ -110,9 +110,8 @@ router.get('/get/:id', async(req, res, next) => {
     }
 
     try {
-        let id = req.params.id.split('=');
-        id = id[1];
-        let results = await model.getPersonneById(id)
+        let id = req.params.id;
+        let results = await model.getPersonneById(id);
         res.json(results);
     } catch (e) {
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
