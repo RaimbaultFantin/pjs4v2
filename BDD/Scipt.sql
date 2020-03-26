@@ -150,22 +150,3 @@ alter table coach
 alter table coach
     add constraint fk_coach_personne
         foreign key (id_personne) references personne(id);
-
--- Définition des triggers --
-
-CREATE TRIGGER tr_evenement_check
-BEFORE INSERT ON evenement FOR EACH ROW
-
--- EN TEST --
-BEGIN
-	DECLARE @v_message varchar(30);
-    SET @ v_message = ( SELECT message FROM evenement WHERE id_equipe = :NEW.id_equipe AND ((temporalite_debut > :NEW.temporalite_debut AND temporalite_debut < :NEW.temporalite_fin)OR (temporalite_fin > :NEW.temporalite_debut AND temporalite_fin < :NEW.temporalite_fin)));
-    IF (SELECT COUNT(*) FROM test) <= 0 THEN
-    END IF;
-END;
-
-lock table evenement write;
-insert into evenement values
-(1, 1, '2020-01-01 02:00:02', '2020-01-01 03:30:02', 'Ceci est un fail'),
-(1, 1, '2020-01-01 01:00:02', '2020-01-01 03:29:59', 'Pour etre sûr');
-unlock tables;
