@@ -1,7 +1,7 @@
 /* Imports */
 const express = require('express');
 const jwtUtils = require('../utils/jwt.utils')
-const model = require('../model/PersonneModel');
+const model = require('../models/PersonneModel');
 const bcrypt = require('bcrypt');
 
 /* Création des Regex */
