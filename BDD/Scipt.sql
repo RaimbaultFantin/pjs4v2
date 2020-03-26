@@ -21,12 +21,12 @@ create table personne (
 
 lock tables personne write;
 insert into personne values
-(1, 'raimbaultfantin94@gmail.com', 'root', 'Fantin', 'Raimbault'),
-(2, 'faresamiar1@gmail.com', 'root', 'Fares', 'Amiar'),
-(3, 'rabyanisrabia@gmail.com', 'root', 'Yanis', 'Rabia'),
-(4, 'maziarzoliwier93@gmail.com', 'root', 'Oliwier', 'Maziarz'),
-(5, 'pedron.benjamin@gmail.com', 'root', 'Benjamin', 'Pedron'),
-(6, 'amraoui.many@gmail.com', 'root', 'Mariam', 'Amraoui');
+(1, 'raimbaultfantin94@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fantin', 'Raimbault'),
+(2, 'faresamiar1@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fares', 'Amiar'),
+(3, 'rabyanisrabia@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Yanis', 'Rabia'),
+(4, 'maziarzoliwier93@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Oliwier', 'Maziarz'),
+(5, 'pedron.benjamin@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Benjamin', 'Pedron'),
+(6, 'amraoui.many@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Mariam', 'Amraoui');
 unlock tables;
 
 create table sport (
