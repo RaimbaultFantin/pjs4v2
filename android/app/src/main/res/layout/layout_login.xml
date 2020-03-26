@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/labelCo"
+        android:text="Connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/btnCo"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="#00E21A1A"
+        android:backgroundTint="#FD009688"
+        android:backgroundTintMode="add"
+        android:text="Se connecter"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        />
+
+    <EditText
+        android:id="@+id/txtPass"
+        android:layout_marginBottom="64dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_below="@+id/txtLogin"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_alignStart="@+id/txtLogin"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/txtLogin"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/labelCo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"/>
+
+</RelativeLayout>
