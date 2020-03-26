@@ -1,6 +1,6 @@
 /* Imports */
 const express = require('express');
-const jwtUtils = require('../../utils/jwt.utils')
+const jwtUtils = require('../utils/jwt.utils')
 const model = require('../model/PersonneModel');
 const bcrypt = require('bcrypt');
 
