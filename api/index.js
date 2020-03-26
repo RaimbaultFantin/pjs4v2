@@ -1,22 +1,21 @@
 require('dotenv').config()
 
-/* Imports */
+/* Initialisation de l'app gerant l'api */
 const express = require('express')
-const bodyparser = require('body-parser')
-
 const app = express()
 
-/* */
+/* Initialisation de cors*/
 const cors = require('cors')
 app.use(cors())
 
-/* */
+/* Initilisation de bodyparser */
+const bodyparser = require('body-parser')
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
-/* Gestion des différentes routes disponibles */
-const personneRoute = require('./routes/PersonneRoute')
-app.use('/personne', personneRoute)
+/* On utilise un middleware qui gere le routage */
+const routerMiddleware = require('./middlewares/router');
+app.use(routerMiddleware);
 
 /* Si aucune des routes n'a ete emprunter alors elle n'existe pas */
 app.use((req, res, next) => {
