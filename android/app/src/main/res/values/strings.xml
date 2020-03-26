@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Application</string>
     <string name="title_activity_accueil">AccueilActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>
