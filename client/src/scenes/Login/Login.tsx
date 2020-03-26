@@ -66,7 +66,7 @@ export default function Login(props: LoginProps) {
     setcurrentEmail(e.currentTarget.value);
   };
 
-  const handlgeChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setCurrentPassword(e.currentTarget.value);
   };
@@ -141,7 +141,7 @@ export default function Login(props: LoginProps) {
             helperText={errorEmail.message}
           />
           <TextField
-            onChange={handlgeChangePassword}
+            onChange={handleChangePassword}
             required={true}
             color="secondary"
             InputLabelProps={{
@@ -150,6 +150,7 @@ export default function Login(props: LoginProps) {
             InputProps={{
               className: classes.input
             }}
+            value={currentPassword}
             id="filled-basic"
             label="Password"
             type="password"

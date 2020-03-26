@@ -11,10 +11,12 @@ export class User {
   public id: number;
   public email: string;
   public mdp: string;
-  constructor(id: number, email: string, mdp: string) {
+  public isCoach: boolean;
+  constructor(id: number, email: string, mdp: string, isCoach: boolean) {
     this.id = id;
     this.email = email;
     this.mdp = mdp;
+    this.isCoach = isCoach;
   }
 }
 
@@ -22,7 +24,10 @@ export class User {
  * Belong to index
  */
 function App() {
-  const [bdd] = useState<Array<User>>([new User(1, "fantin", "123")]);
+  const [bdd] = useState<Array<User>>([
+    new User(1, "fantin", "123", true),
+    new User(1, "oliwier", "123", false)
+  ]);
 
   const [user, setUser] = useState<User | null>(getSessionCookie());
 

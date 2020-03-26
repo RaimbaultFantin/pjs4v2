@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
-import SimpleCard from "../../../components/SimpleCard/SimpleCard";
+import SimpleCard from "../../../components/WelcomeCard/WelcomeCard";
 import { HeightContext } from "../../../services/context/HeightContext";
 
 interface WelcomeProps {}

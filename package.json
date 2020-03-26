@@ -1,20 +1,20 @@
 {
-    "name": "pjs4",
-    "version": "1.0.0",
-    "description": "pjs4",
-    "main": "api/server.js",
-    "scripts": {
-        "client-install": "cd client && npm install",
-        "start": "node server.js",
-        "server": "nodemon ./api/index.js",
-        "server-install": "cd api && npm install",
-        "client": "npm start --prefix client",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
-    },
-    "author": "sport manager team",
-    "license": "",
-    "devDependencies": {},
-    "dependencies": {
-        "concurrently": "^3.5.1"
-    }
+  "name": "pjs4",
+  "version": "1.0.0",
+  "description": "pjs4",
+  "main": "api/server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon ./api/index.js",
+    "server-install": "cd api && npm install",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "sport manager team",
+  "license": "",
+  "devDependencies": {},
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  }
 }

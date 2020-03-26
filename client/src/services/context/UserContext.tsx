@@ -13,8 +13,8 @@ export const getSessionCookie = (): User | null => {
   if (sessionCookie === undefined) {
     return null;
   } else {
-    let { id, email, mdp } = JSON.parse(sessionCookie);
-    return new User(id, email, mdp);
+    let { id, email, mdp, isCoach } = JSON.parse(sessionCookie);
+    return new User(id, email, mdp, isCoach);
   }
 };
 
