@@ -150,3 +150,14 @@ alter table coach
 alter table coach
     add constraint fk_coach_personne
         foreign key (id_personne) references personne(id);
+
+-- Création des vues --
+
+CREATE VIEW vue_personne
+AS 
+SELECT 
+    mail, 
+    prenom, 
+    nom
+FROM
+    personne;
