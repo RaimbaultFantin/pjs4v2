@@ -101,7 +101,7 @@ router.post('/login', async(req, res, next) => {
 /* ------------------------- Définition des routes AVEC JWT ------------------------- */
 
 router.get('/:id', async(req, res, next) => {
-
+    
     var token = req.headers['authorization'];
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */
     var id = jwtUtils.checkToken(token);
