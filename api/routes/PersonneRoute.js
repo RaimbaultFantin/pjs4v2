@@ -1,5 +1,8 @@
-/* Imports */
+/* Récuperation du routeur */
 const express = require('express');
+const router = express.Router();
+
+/* Imports */
 const jwtUtils = require('../utils/jwt.utils')
 const model = require('../models/PersonneModel');
 const bcrypt = require('bcrypt');
@@ -8,33 +11,33 @@ const bcrypt = require('bcrypt');
 const mailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
 
-/* Récuperation du routeur */
-const router = express.Router();
+// Recup utils erreur
+const error = require('../utils/error');
 
 /* ------------------------- Définition des routes SANS JWT ------------------------- */
 
 router.post('/inscription', async(req, res, next) => {
     /* On commence par vérifier que les paramètres obligatoires sont présents dans la requête */
     if (req.body.mail === undefined || req.body.pass === undefined || req.body.nom === undefined || req.body.prenom === undefined) {
-        return res.status(400).json({ 'error': 'paramètre manquant' });
+        return res.status(400).json(error(400, 'Parametres manquant'));
     }
 
     /* On utilise un REGEX pour la mail et le MDP, on le fait aussi sur le front mais vaut mieux double check */
     if (!mailRegex.test(req.body.mail)) {
-        return res.status(400).json({ 'error': 'mail non valide' });
+        return res.status(400).json(error(400, 'mail non valide'));
     }
     if (!passRegex.test(req.body.pass)) {
-        return res.status(400).json({ 'error': 'mdp non valide' });
+        return res.status(400).json(error(400, 'mot de passe non valide'));
     }
 
     /* On vérifie que le mail n'est pas déjà enregistré en BDD */
     try {
         let rep = await model.getPersonneByMail(req.body.mail);
         if (rep[0]) {
-            return res.status(400).json({ 'error': 'mail déjà répertorié' });
+            return res.status(400).json(erreur(400, 'mail déjà répertorié'));
         }
     } catch (e) {
-        return res.status(500).json({ 'error': 'erreur dans la requête' });
+        return res.status(500).json(error(500,'erreur bdd'));
     }
 
     /* On crypte le mot de passe, puis en envoie la requête à la BDD */
@@ -50,32 +53,32 @@ router.post('/inscription', async(req, res, next) => {
         /* debug */
         console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json({ 'error': 'le serveur a rencontré un problème' });
+        return res.status(500).json(error(500, 'erreur bdd'));
     }
 });
 
 router.post('/login', async(req, res, next) => {
     /* On commence par vérifier que les paramètres obligatoires sont présents dans la requête */
     if (req.body.mail === undefined || req.body.pass === undefined) {
-        return res.status(400).json({ 'error': 'paramètre manquant' });
+        return res.status(400).json(error(400, 'Parametres manquant'));
     }
 
     /* On utilise un REGEX pour la mail, le MDP */
     if (!mailRegex.test(req.body.mail)) {
-        return res.status(400).json({ 'error': 'mail non valide' });
+        return res.status(400).json(error(400, 'mail non valide'));
     }
     if (!passRegex.test(req.body.pass)) {
-        return res.status(400).json({ 'error': 'mdp non valide' });
+        return res.status(400).json(error(400, 'mot de passe non valide'));
     }
 
     /* On vérifie que le mail est bien enregistré */
     try {
         var rep = await model.getPersonneByMail(req.body.mail);
         if (!rep[0]) {
-            return res.status(400).json({ 'error': 'mail non répertorié' });
+            return res.status(400).json(erreur(400, 'mail non répertorié'));
         }
     } catch (e) {
-        return res.status(400).json(rep);
+        return res.status(500).json(erreur(500, 'erreur bdd'));
     }
 
     /* On compare le mdp envoyé pas le client avec celui qu'on a retrouvé en BDD */
@@ -91,7 +94,7 @@ router.post('/login', async(req, res, next) => {
         /* debug */
         console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json({ 'error': 'le serveur a rencontré un problème' });
+        return res.status(500).json(error(500, 'erreur bdd'));
     }
 });
 
@@ -103,7 +106,7 @@ router.get('/:id', async(req, res, next) => {
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */
     var id = jwtUtils.checkToken(token);
     if (id < 0) {
-        return res.status(500).json({ 'error': 'Token invalide' });
+        return res.status(400).json(error(400, 'Token invalide' ));
     }
 
     try {
@@ -113,7 +116,7 @@ router.get('/:id', async(req, res, next) => {
         /* debug */
         console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json({ 'error': 'le serveur a rencontré un problème' });
+        return res.status(500).json(error(500, 'erreur bdd'));
     }
 })
 
