@@ -68,15 +68,15 @@ function App() {
   };
 
   /** Exemple Test Route with our nodeJS Api */
-  useEffect(() => {
-    async function getTest() {
-      let data = await fetch("/test")
-        .then(res => res.json())
-        .catch(err => console.log(err));
-      console.log(data);
-    }
-    getTest();
-  });
+  // useEffect(() => {
+  //   async function getTest() {
+  //     let data = await fetch("/test")
+  //       .then(res => res.json())
+  //       .catch(err => console.log(err));
+  //     console.log(data);
+  //   }
+  //   getTest();
+  // });
 
   return (
     <ThemeContext.Provider value={themes}>

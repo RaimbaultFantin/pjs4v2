@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import InfiniteCalendar from "react-infinite-calendar";
 import "react-infinite-calendar/styles.css"; // only needs to be imported once
 import { Grid, makeStyles } from "@material-ui/core";
 import Events from "../Events/Events";
-import DenseAppBar from "../DenseAppBar/DenseAppBar";
+import PlanningBar from "../PlanningBar/PlanningBar";
 import { HeightContext } from "../../services/context/HeightContext";
 
 export default function Planning() {
-  // Render the Calendar
+  // property of Calendar
   const today = new Date();
   const lastWeek = new Date(
     today.getFullYear(),
@@ -19,6 +19,7 @@ export default function Planning() {
     today.getMonth() + 1,
     today.getDate()
   );
+  // end property of Calendar
 
   const heights = useContext(HeightContext);
 
@@ -38,7 +39,10 @@ export default function Planning() {
       alignItems: "center"
     }
   });
+
   const classes = useStyles();
+
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   return (
     <Grid
@@ -51,18 +55,20 @@ export default function Planning() {
       <Grid item xs={12}>
         <Grid container justify="center">
           <InfiniteCalendar
-            selected={today}
+            selected={selectedDate}
             minDate={lastWeek}
             min={lastWeek}
             max={nextMonth}
             height={500}
-            //onSelect={(date: any) => console.log(date)}
+            onSelect={(date: React.SetStateAction<Date>) =>
+              setSelectedDate(date)
+            }
           />
           <Grid item xs={6}>
             <div className={classes.hauteur}>
-              <DenseAppBar />
+              <PlanningBar />
               <Grid item xs={10} className={classes.overflow}>
-                <Events selectedDate={today} />
+                <Events selectedDate={selectedDate} />
               </Grid>
             </div>
           </Grid>

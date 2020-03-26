@@ -39,7 +39,7 @@ export default function Events(props: EventsProps) {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(selectedDate);
+    console.log("from Event" + selectedDate);
   }, [selectedDate]);
 
   // a suppr
@@ -48,13 +48,14 @@ export default function Events(props: EventsProps) {
   // fin a suppr
 
   const [events, setEvents] = useState<Array<Event>>([
-    new Event(debut, fin, "training foot")
+    new Event(debut, fin, "Training Foot")
   ]);
 
   return (
     <div>
+      {/** if there are no events */}
       {!events?.length ? (
-        <CardNoEvents />
+        <CardNoEvents selectedDate={selectedDate} />
       ) : (
         <TableContainer component={Paper}>
           <Table

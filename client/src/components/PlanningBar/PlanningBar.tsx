@@ -5,7 +5,11 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
-export default function DenseAppBar() {
+interface PlanningBarProps {
+  edit: boolean;
+}
+
+export default function PlanningBar() {
   return (
     <div>
       <AppBar position="static">
