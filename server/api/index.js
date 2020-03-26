@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
 /* Gestion des différentes routes disponibles */
-const personneRoute = require('./api/routes/personneRoute')
+const personneRoute = require('./routes/PersonneRoute')
 app.use('/personne', personneRoute)
 
 /* Si aucune des routes n'a ete emprunter alors elle n'existe pas */
@@ -34,5 +34,3 @@ app.use((error, req, res, next) => {
         }
     })
 })
-
-module.exports = app;
