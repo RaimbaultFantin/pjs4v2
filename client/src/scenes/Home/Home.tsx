@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import LeftBar from "./components/LeftBar";
 import PersonnalDrawer, {
   TextPath
-} from "../../components/PersonnalDrawer/PersonnalDrawer";
+} from "../../components/LeftDrawer/LeftDrawer";
 import RightBar from "./components/RightBar";
 import { ThemeContext } from "../../services/context/ThemeContext";
 import { HeightContext } from "../../services/context/HeightContext";
@@ -82,7 +82,7 @@ export default function Home() {
   // token context
   const { token } = useContext(TokenContext);
 
-  /** Current User */
+  /** CURRENT USER */
 
   // state user logged
   const [user, setUser] = useState<User | null>(null);
@@ -106,7 +106,9 @@ export default function Home() {
       console.log(e);
     }
   };
+  /** END CURRENT USER */
 
+  const [teams, setTeams] = useState<Array<TextPath>>([]);
   // get teams
   const getTeams = async () => {
     try {
@@ -115,8 +117,12 @@ export default function Home() {
           Authorization: `Bearer ${token}`
         }
       });
-      const { mail, prenom, nom } = response.data;
-      setUser(new User(mail, prenom, nom));
+      let teams: TextPath[] = [];
+      response.data.map((team: any) =>
+        teams.push(new TextPath(team.nom_equipe, "t/" + team.id_equipe))
+      );
+      console.log(teams);
+      setTeams(teams);
     } catch (e) {
       console.log(e);
     }
@@ -124,6 +130,7 @@ export default function Home() {
 
   useEffect(() => {
     getUser();
+    getTeams();
   }, []);
 
   const textItems: Array<TextPath> = [
@@ -151,7 +158,7 @@ export default function Home() {
                 dropDown={true}
                 textDropDown={"My Teams"}
                 textsItems={textItems}
-                textsItemsDropDown={textsItemsDropDown}
+                textsItemsDropDown={teams}
               />
             </Grid>
             <Grid classes={{ root: classes.middleSide }} item xs={10}>
