@@ -153,7 +153,7 @@ alter table coach
 
 -- Création des vues --
 
-CREATE VIEW vue_personne
+CREATE OR REPLACE VIEW vue_personne
 AS 
 SELECT 
     id,
@@ -162,3 +162,21 @@ SELECT
     nom
 FROM
     personne;
+
+
+CREATE OR REPLACE VIEW vue_equipe_coach
+AS 
+SELECT 
+    e.id as id_equipe,
+    e.nom_equipe as nom_equipe,
+    p.id as id_coach,
+    p.mail as mail_coach, 
+    p.prenom as prenom_coach, 
+    p.nom as nom_coach
+FROM
+    personne as p,
+    equipe as e
+INNER JOIN
+    id
+WHERE
+    ;
