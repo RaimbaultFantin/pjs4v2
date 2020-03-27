@@ -20,7 +20,7 @@ export default function PlanningBar(props: PlanningBarProps) {
     <div>
       <AppBar position="static">
         <Toolbar variant="dense">
-          {user.isCoach ? <EditDialog /> : <div />}
+          {true ? <EditDialog /> : <div />}
 
           <Typography variant="h6" color="inherit">
             Planning
