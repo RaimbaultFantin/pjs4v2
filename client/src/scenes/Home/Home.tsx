@@ -15,6 +15,8 @@ import Team from "./components/Team/Team";
 import CreateTeam from "./components/CreateTeam";
 import JoinTeam from "./components/JoinTeam";
 import { CurrentTitlePageContext } from "../../services/context/CurrentTitlePageContext";
+import axios from "axios";
+import { TokenContext } from "../../services/context/TokenContext";
 
 /**
  * Home belong to App
@@ -32,20 +34,11 @@ export default function Home() {
     bottomnav: 56
   };
 
-  const [title, setTitle] = useState<string>("Home");
-
-  const currentTitlePage = {
-    title,
-    setTitle
-  };
   // Screen size
   useEffect(() => {
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   });
-
-  // get user & teams
-  useEffect(() => {});
 
   const themes = useContext(ThemeContext);
 
@@ -70,11 +63,33 @@ export default function Home() {
 
   const { path } = useRouteMatch();
 
+  // title of page
+  const [title, setTitle] = useState<string>("Home");
+
+  const currentTitlePage = {
+    title,
+    setTitle
+  };
+
+  const { token } = useContext(TokenContext);
+
+  // get user logged
+  const getUser = async () => {
+    axios.get("/user/get", {
+      headers: {
+        Authorization: `Basic ${token}`
+      }
+    });
+  };
+
+  useEffect(() => {});
+
   const textItems: Array<TextPath> = [
     new TextPath("Create a Team", "create-team"),
     new TextPath("Join a Team", "join-team")
   ];
-  const textDropDown: string = "My Teams";
+
+  // teams and urls
   const textsItemsDropDown: Array<TextPath> = [
     new TextPath("Paris-SG", "t/psg"),
     new TextPath("Bayern", "t/bayern"),
@@ -89,7 +104,7 @@ export default function Home() {
             <LeftBar />
             <PersonnalDrawer
               dropDown={true}
-              textDropDown={textDropDown}
+              textDropDown={"My Teams"}
               textsItems={textItems}
               textsItemsDropDown={textsItemsDropDown}
             />
