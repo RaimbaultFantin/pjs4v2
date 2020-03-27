@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import GroupAvatars from "../../../../../components/GroupAvatar/GroupAvatar";
 import PersonnalDrawer, {
   TextPath
-} from "../../../../../components/PersonnalDrawer/PersonnalDrawer";
+} from "../../../../../components/LeftDrawer/LeftDrawer";
 import FolderAvatar from "../../../../../components/FolderAvatar/FolderAvatar";
 
 interface RightContentProps {}

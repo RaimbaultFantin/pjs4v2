@@ -58,6 +58,10 @@ export default function PersonnalDrawer(props: PersonnalDrawerProps) {
     color: themes.white
   };
 
+  const or = {
+    color: "#ffc105"
+  };
+
   const classes = useStyles();
 
   const [open, setOpen] = useState<boolean>(true);
@@ -121,7 +125,7 @@ export default function PersonnalDrawer(props: PersonnalDrawerProps) {
                       button
                     >
                       <ListItemIcon>
-                        <SportsSoccerIcon style={iconColor} />
+                        <SportsSoccerIcon style={or} />
                       </ListItemIcon>
                       <ListItemText
                         classes={{
