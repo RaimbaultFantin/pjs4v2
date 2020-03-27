@@ -48,7 +48,7 @@ router.post('/inscription', async(req, res, next) => {
         /* On renvoie un JWT, comme ça le login peut se faire automatiquement derière */
         return res.status(200).json({
             'success': 'Personne ajoutée avec succès',
-            'token': jwtUtils.genererToken(id),
+            'token': jwtUtils.genererToken(personne[0].id),
             'datas': {
                 'prenom': personne[0].prenom,
                 'nom': personne[0].nom,
@@ -73,9 +73,9 @@ router.post('/login', async(req, res, next) => {
     if (!mailRegex.test(req.body.mail)) {
         return res.status(400).json(error(400, 'mail non valide'));
     }
-    if (!passRegex.test(req.body.pass)) {
-        return res.status(400).json(error(400, 'mot de passe non valide'));
-    }
+    // if (!passRegex.test(req.body.pass)) {
+    //     return res.status(400).json(error(400, 'mot de passe non valide'));
+    // }
 
     /* On vérifie que le mail est bien enregistré */
     try {
@@ -94,7 +94,7 @@ router.post('/login', async(req, res, next) => {
         return res.status(200).json({
             'success': 'Personne identifiée avec succès',
             /* On génère le token de la personne en y plaçant son identifiant */
-            'token': jwtUtils.genererToken(personne[0]),
+            'token': jwtUtils.genererToken(personne[0].id),
             'datas': {
                 'prenom': personne[0].prenom,
                 'nom': personne[0].nom,
@@ -111,17 +111,16 @@ router.post('/login', async(req, res, next) => {
 
 /* ------------------------- Définition des routes AVEC JWT ------------------------- */
 
-router.get('/get/:id', async(req, res, next) => {
+router.get('/get', async(req, res, next) => {
 
     var token = req.headers['authorization'];
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */
-    var id = jwtUtils.checkToken(token);
+    const id = jwtUtils.checkToken(token);
     if (id < 0) {
         return res.status(400).json(error(400, 'Token invalide'));
     }
 
     try {
-        let id = req.params.id;
         let results = await model.getPersonneById(id);
         res.json(results);
     } catch (e) {

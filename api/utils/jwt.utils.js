@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'laclefprivedutokenonpourrachangerca'
 
 module.exports = {
-    genererToken: function(personne) {
+    genererToken: function(id) {
         return jwt.sign({
-                idPersonne: personne.idPersonne
+                'idP': id
             },
             JWT_SECRET, {
                 expiresIn: '1h'
@@ -17,19 +17,16 @@ module.exports = {
         return (authorization !== null) ? authorization.replace('Bearer ', '') : null;
     },
     checkToken: function(authorization) {
-        var idPersonne = -1;
+        var id = -1;
         var token = this.parseAuthorization(authorization);
         if (token !== null) {
             try {
-                /* Await ? */
                 var jwtToken = jwt.verify(token, JWT_SECRET);
                 if (jwtToken !== null) {
-                    idPersonne = jwtToken.idPersonne
+                    id = jwtToken.idP;
                 }
-            } catch (err) {
-
-            }
+            } catch (err) {}
         }
-        return idPersonne;
+        return id;
     }
 }
