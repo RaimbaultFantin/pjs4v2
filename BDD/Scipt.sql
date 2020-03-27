@@ -184,6 +184,25 @@ SELECT
 FROM
     personne;
 
+CREATE OR REPLACE VIEW vue_personne_equipes
+AS
+SELECT
+    p.id as id_personne,
+    e.id as id_equipe,
+    e.nom_equipe as nom_equipe,
+    s.nom as nom_sport
+FROM
+    personne as p,
+    equipe as e,
+    sport as s,
+    appartenance as a,
+    coach as c
+WHERE
+    ((a.id_personne = p.id AND a.id_equipe = e.id ) OR
+    (c.id_personne = p.id AND c.id_equipe = e.id)) AND
+    s.id = e.id_sport
+GROUP BY p.id, e.id;
+
 
 CREATE OR REPLACE VIEW vue_equipe_coach
 AS
@@ -196,8 +215,8 @@ SELECT
     p.nom as nom_coach
 FROM
     personne as p,
-    equipe as e
-    INNER JOIN
-    id 
+    equipe as e,
+    coach as c
 WHERE
-    ;
+    c.id_equipe = e.id_equipe AND
+    c.id_personne = p.id;
