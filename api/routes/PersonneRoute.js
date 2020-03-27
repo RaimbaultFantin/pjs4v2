@@ -37,7 +37,7 @@ router.post('/inscription', async(req, res, next) => {
             return res.status(400).json(erreur(400, 'mail déjà répertorié'));
         }
     } catch (e) {
-        return res.status(500).json(error(500,'erreur bdd'));
+        return res.status(500).json(error(500, e));
     }
 
     /* On crypte le mot de passe, puis en envoie la requête à la BDD */
@@ -53,7 +53,7 @@ router.post('/inscription', async(req, res, next) => {
         /* debug */
         console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json(error(500, 'erreur bdd'));
+        return res.status(500).json(error(500, e));
     }
 });
 
@@ -75,10 +75,10 @@ router.post('/login', async(req, res, next) => {
     try {
         var rep = await model.getPersonneByMail(req.body.mail);
         if (!rep[0]) {
-            return res.status(400).json(erreur(400, 'mail non répertorié'));
+            return res.status(400).json(error(400, 'mail non répertorié'));
         }
     } catch (e) {
-        return res.status(500).json(erreur(500, 'erreur bdd'));
+        return res.status(500).json(error(500, e));
     }
 
     /* On compare le mdp envoyé pas le client avec celui qu'on a retrouvé en BDD */
@@ -94,30 +94,31 @@ router.post('/login', async(req, res, next) => {
         /* debug */
         console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json(error(500, 'erreur bdd'));
+        return res.status(500).json(error(500, e));
     }
 });
 
 /* ------------------------- Définition des routes AVEC JWT ------------------------- */
 
-router.get('/:id', async(req, res, next) => {
+router.get('/get/:id', async(req, res, next) => {
 
     var token = req.headers['authorization'];
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */
     var id = jwtUtils.checkToken(token);
     if (id < 0) {
-        return res.status(400).json(error(400, 'Token invalide' ));
+        return res.status(400).json(error(400, 'Token invalide'));
     }
 
     try {
-        let results = await model.getPersonneById(req.params.id)
+        let id = req.params.id;
+        let results = await model.getPersonneById(id);
         res.json(results);
     } catch (e) {
-        /* debug */
-        console.log(e.sqlMessage);
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
-        return res.status(500).json(error(500, 'erreur bdd'));
+        return res.status(500).json(error(500, e));
     }
 })
+
+
 
 module.exports = router
