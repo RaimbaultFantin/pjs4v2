@@ -1,3 +1,11 @@
 import { createContext } from "react";
 
-export const TokenContext = createContext<string>("");
+interface TokenContextAttributes {
+  token: string | null;
+  setToken: (token: string) => void;
+}
+
+export const TokenContext = createContext<TokenContextAttributes>({
+  token: "",
+  setToken: token => {}
+});

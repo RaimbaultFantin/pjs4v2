@@ -5,7 +5,8 @@ import { UserContext } from "./services/context/UserContext";
 import Home from "./scenes/Home/Home";
 import { ThemeContext } from "./services/context/ThemeContext";
 import Register from "./scenes/Register/Register";
-import { getSessionCookie } from "./services/cookies/Session";
+import { getSessionCookie, getToken } from "./services/cookies/Session";
+import { TokenContext } from "./services/context/TokenContext";
 
 export class User {
   public id: number;
@@ -24,11 +25,11 @@ export class User {
  * Belong to index
  */
 function App() {
-  const [user, setUser] = useState<User | null>(getSessionCookie());
+  const [token, setToken] = useState<string | null>(getToken());
 
-  const userContextValue = {
-    user: user,
-    setUser: setUser
+  const tokenContextValue = {
+    token,
+    setToken
   };
 
   const themes = {
@@ -43,32 +44,32 @@ function App() {
 
   return (
     <ThemeContext.Provider value={themes}>
-      <UserContext.Provider value={userContextValue}>
+      <TokenContext.Provider value={tokenContextValue}>
         <Switch>
           <Route
             exact
             path="/login"
             render={() => {
-              if (!user) return <Login />;
+              if (!token) return <Login />;
               return <Redirect to="/home" />;
             }}
           />
           <Route
             path="/register"
             render={() => {
-              if (!user) return <Register />;
+              if (!token) return <Register />;
               return <Redirect to="/home" />;
             }}
           />
           <Route
             path="/home"
             render={() => {
-              if (user) return <Home />;
+              if (token) return <Home />;
               return <Redirect to="/login" />;
             }}
           />
         </Switch>
-      </UserContext.Provider>
+      </TokenContext.Provider>
     </ThemeContext.Provider>
   );
 }
