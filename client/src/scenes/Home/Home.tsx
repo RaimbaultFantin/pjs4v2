@@ -38,11 +38,14 @@ export default function Home() {
     title,
     setTitle
   };
-
+  // Screen size
   useEffect(() => {
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   });
+
+  // get user & teams
+  useEffect(() => {});
 
   const themes = useContext(ThemeContext);
 

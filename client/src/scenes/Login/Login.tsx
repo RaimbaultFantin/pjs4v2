@@ -7,7 +7,10 @@ import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import history from "../../services/history/history";
 import { ThemeContext } from "../../services/context/ThemeContext";
-import { setSessionCookie } from "../../services/cookies/Session";
+import {
+  setSessionCookie,
+  setTokenCookie
+} from "../../services/cookies/Session";
 import axios from "axios";
 
 export interface LoginProps {}
@@ -78,26 +81,24 @@ export default function Login() {
       display: false,
       message: ""
     });
-    axios
-      .post("/user/login", {
+    try {
+      const response = await axios.post("/user/login", {
         mail: currentEmail,
         pass: currentPassword
-      })
-      .then(response => {
-        console.log(response);
-        history.push("/home");
-      })
-      .catch(error => {
-        console.log(error);
-        setErrorEmail({
-          display: true,
-          message: "wrong"
-        });
-        setErrorPassword({
-          display: true,
-          message: "wrong"
-        });
       });
+      // set The token in web
+      setTokenCookie(response.data.token);
+      // redirect '/home'
+    } catch (error) {
+      setErrorEmail({
+        display: true,
+        message: "Wrong"
+      });
+      setErrorPassword({
+        display: true,
+        message: "Wrong"
+      });
+    }
   };
 
   return (
