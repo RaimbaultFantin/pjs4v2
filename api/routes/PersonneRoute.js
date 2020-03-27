@@ -32,8 +32,8 @@ router.post('/inscription', async(req, res, next) => {
 
     /* On vérifie que le mail n'est pas déjà enregistré en BDD */
     try {
-        let rep = await model.getPersonneByMail(req.body.mail);
-        if (rep[0]) {
+        let personne = await model.getPersonneByMail(req.body.mail);
+        if (personne[0]) {
             return res.status(400).json(erreur(400, 'mail déjà répertorié'));
         }
     } catch (e) {
@@ -44,10 +44,16 @@ router.post('/inscription', async(req, res, next) => {
     try {
         let pass = await bcrypt.hash(req.body.pass, 16);
         let id = await model.setPersonne(req.body.mail, pass, req.body.prenom, req.body.nom);
+        let personne = await model.getPersonneById(id);
         /* On renvoie un JWT, comme ça le login peut se faire automatiquement derière */
         return res.status(200).json({
             'success': 'Personne ajoutée avec succès',
-            'token': jwtUtils.genererToken(id)
+            'token': jwtUtils.genererToken(id),
+            'datas': {
+                'prenom': personne[0].prenom,
+                'nom': personne[0].nom,
+                'mail': personne[0].mail
+            }
         });
     } catch (e) {
         /* debug */
@@ -73,8 +79,8 @@ router.post('/login', async(req, res, next) => {
 
     /* On vérifie que le mail est bien enregistré */
     try {
-        var rep = await model.getPersonneByMail(req.body.mail);
-        if (!rep[0]) {
+        var personne = await model.getPersonneByMail(req.body.mail);
+        if (!personne[0]) {
             return res.status(400).json(error(400, 'mail non répertorié'));
         }
     } catch (e) {
@@ -84,11 +90,16 @@ router.post('/login', async(req, res, next) => {
     /* On compare le mdp envoyé pas le client avec celui qu'on a retrouvé en BDD */
     try {
 
-        await bcrypt.compare(req.body.pass, rep[0].pass.toString());
+        await bcrypt.compare(req.body.pass, personne[0].pass.toString());
         return res.status(200).json({
             'success': 'Personne identifiée avec succès',
             /* On génère le token de la personne en y plaçant son identifiant */
-            'token': jwtUtils.genererToken(rep[0])
+            'token': jwtUtils.genererToken(personne[0]),
+            'datas': {
+                'prenom': personne[0].prenom,
+                'nom': personne[0].nom,
+                'mail': personne[0].mail
+            }
         });
     } catch (e) {
         /* debug */
@@ -117,7 +128,7 @@ router.get('/get/:id', async(req, res, next) => {
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
         return res.status(500).json(error(500, e));
     }
-})
+});
 
 
 
