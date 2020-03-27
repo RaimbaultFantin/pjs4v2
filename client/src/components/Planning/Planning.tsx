@@ -1,13 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import InfiniteCalendar from "react-infinite-calendar";
 import "react-infinite-calendar/styles.css"; // only needs to be imported once
 import { Grid, makeStyles } from "@material-ui/core";
 import Events from "../Events/Events";
-import DenseAppBar from "../DenseAppBar/DenseAppBar";
+import PlanningBar from "../PlanningBar/PlanningBar";
 import { HeightContext } from "../../services/context/HeightContext";
+import { UserContext } from "../../services/context/UserContext";
+
+/**
+ * Event is a class which represente a time in the day
+ */
+export class Event {
+  public start: Date;
+  public end: Date;
+  public event: string;
+  constructor(start: Date, end: Date, event: string) {
+    this.start = start;
+    this.end = end;
+    this.event = event;
+  }
+}
 
 export default function Planning() {
-  // Render the Calendar
+  // property of Calendar
   const today = new Date();
   const lastWeek = new Date(
     today.getFullYear(),
@@ -19,6 +34,7 @@ export default function Planning() {
     today.getMonth() + 1,
     today.getDate()
   );
+  // end property of Calendar
 
   const heights = useContext(HeightContext);
 
@@ -38,7 +54,21 @@ export default function Planning() {
       alignItems: "center"
     }
   });
+
   const classes = useStyles();
+
+  // State SelectedDate
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+  // a suppr
+  const debut = new Date("1995-12-17T15:30:00");
+  const fin = new Date("1995-12-17T17:30:00");
+  // fin a suppr
+
+  // State Events
+  const [events, setEvents] = useState<Array<Event>>([
+    new Event(debut, fin, "Training Foot")
+  ]);
 
   return (
     <Grid
@@ -51,18 +81,20 @@ export default function Planning() {
       <Grid item xs={12}>
         <Grid container justify="center">
           <InfiniteCalendar
-            selected={today}
+            selected={selectedDate}
             minDate={lastWeek}
             min={lastWeek}
             max={nextMonth}
             height={500}
-            //onSelect={(date: any) => console.log(date)}
+            onSelect={(date: React.SetStateAction<Date>) =>
+              setSelectedDate(date)
+            }
           />
           <Grid item xs={6}>
             <div className={classes.hauteur}>
-              <DenseAppBar />
+              <PlanningBar setEvents={setEvents} />
               <Grid item xs={10} className={classes.overflow}>
-                <Events selectedDate={today} />
+                <Events events={events} selectedDate={selectedDate} />
               </Grid>
             </div>
           </Grid>
