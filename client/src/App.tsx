@@ -5,21 +5,8 @@ import { UserContext } from "./services/context/UserContext";
 import Home from "./scenes/Home/Home";
 import { ThemeContext } from "./services/context/ThemeContext";
 import Register from "./scenes/Register/Register";
-import { getSessionCookie, getToken } from "./services/cookies/Session";
+import { getToken } from "./services/cookies/Session";
 import { TokenContext } from "./services/context/TokenContext";
-
-export class User {
-  public id: number;
-  public email: string;
-  public mdp: string;
-  public isCoach: boolean;
-  constructor(id: number, email: string, mdp: string, isCoach: boolean) {
-    this.id = id;
-    this.email = email;
-    this.mdp = mdp;
-    this.isCoach = isCoach;
-  }
-}
 
 /**
  * Belong to index

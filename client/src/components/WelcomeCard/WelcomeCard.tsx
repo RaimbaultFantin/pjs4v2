@@ -23,7 +23,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard() {
+interface WelcomeCardProps {
+  userName: string | undefined;
+}
+
+export default function WelcomeCard(props: WelcomeCardProps) {
+  const { userName } = props;
   const classes = useStyles();
 
   return (
@@ -37,8 +42,9 @@ export default function SimpleCard() {
           Sport Manager
         </Typography>
         <Typography color="secondary" variant="h5" component="h2">
-          Welcome Back Fantin !{" "}
+          Welcome Back {userName}
           <span role="img" aria-label="sheep">
+            {" "}
             🥳
           </span>
         </Typography>
@@ -50,7 +56,7 @@ export default function SimpleCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">More About The App</Button>
       </CardActions>
     </Card>
   );

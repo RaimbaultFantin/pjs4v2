@@ -1,16 +1,12 @@
 import React, { useState, useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { User } from "../../App";
 import { UserContext } from "../../services/context/UserContext";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import history from "../../services/history/history";
 import { ThemeContext } from "../../services/context/ThemeContext";
-import {
-  setSessionCookie,
-  setTokenCookie
-} from "../../services/cookies/Session";
+import { setTokenCookie } from "../../services/cookies/Session";
 import axios from "axios";
 
 export interface LoginProps {}
@@ -42,9 +38,6 @@ export default function Login() {
   }));
 
   const classes = useStyles();
-
-  // setUser for set the new Client after login successfull
-  const { setUser } = useContext(UserContext);
 
   const [errorEmail, setErrorEmail] = useState({
     display: false,

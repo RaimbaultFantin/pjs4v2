@@ -130,8 +130,7 @@ router.get("/get", async (req, res, next) => {
 
   try {
     let results = await model.getPersonneById(id);
-    console.log(results[0]);
-    return res.status(200).json(results);
+    return res.status(200).json(results[0]);
   } catch (e) {
     /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
     return res.status(500).json(error(500, e));
