@@ -15,7 +15,7 @@ class PersonneModel {
                         reject(err);
                     } else {
                         /* debug */
-                        console.log('Personne créée avec succès')
+                        console.log('Personne créée avec succès');
                         resolve(results.insertId);
                     }
                 });
@@ -30,12 +30,13 @@ class PersonneModel {
     static getPersonneById = (id) => {
         return new Promise((resolve, reject) => {
             pool.query('SELECT *' +
-                'FROM `personne`' +
+                'FROM `vue_personne`' +
                 'WHERE `id` = ?', [id],
                 (err, results) => {
                     if (err) {
                         return reject(err);
                     } else {
+                        console.log(results);
                         return resolve(results)
                     }
                 });

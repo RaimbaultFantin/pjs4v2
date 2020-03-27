@@ -21,12 +21,12 @@ create table personne (
 
 lock tables personne write;
 insert into personne values
-(1, 'raimbaultfantin94@gmail.com', 'root', 'Fantin', 'Raimbault'),
-(2, 'faresamiar1@gmail.com', 'root', 'Fares', 'Amiar'),
-(3, 'rabyanisrabia@gmail.com', 'root', 'Yanis', 'Rabia'),
-(4, 'maziarzoliwier93@gmail.com', 'root', 'Oliwier', 'Maziarz'),
-(5, 'pedron.benjamin@gmail.com', 'root', 'Benjamin', 'Pedron'),
-(6, 'amraoui.many@gmail.com', 'root', 'Mariam', 'Amraoui');
+(1, 'raimbaultfantin94@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fantin', 'Raimbault'),
+(2, 'faresamiar1@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fares', 'Amiar'),
+(3, 'rabyanisrabia@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Yanis', 'Rabia'),
+(4, 'maziarzoliwier93@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Oliwier', 'Maziarz'),
+(5, 'pedron.benjamin@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Benjamin', 'Pedron'),
+(6, 'amraoui.many@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Mariam', 'Amraoui');
 unlock tables;
 
 create table sport (
@@ -151,21 +151,32 @@ alter table coach
     add constraint fk_coach_personne
         foreign key (id_personne) references personne(id);
 
--- Définition des triggers --
+-- Création des vues --
 
-CREATE TRIGGER tr_evenement_check
-BEFORE INSERT ON evenement FOR EACH ROW
+CREATE OR REPLACE VIEW vue_personne
+AS 
+SELECT 
+    id,
+    mail, 
+    prenom, 
+    nom
+FROM
+    personne;
 
--- EN TEST --
-BEGIN
-	DECLARE @v_message varchar(30);
-    SET @ v_message = ( SELECT message FROM evenement WHERE id_equipe = :NEW.id_equipe AND ((temporalite_debut > :NEW.temporalite_debut AND temporalite_debut < :NEW.temporalite_fin)OR (temporalite_fin > :NEW.temporalite_debut AND temporalite_fin < :NEW.temporalite_fin)));
-    IF (SELECT COUNT(*) FROM test) <= 0 THEN
-    END IF;
-END;
 
-lock table evenement write;
-insert into evenement values
-(1, 1, '2020-01-01 02:00:02', '2020-01-01 03:30:02', 'Ceci est un fail'),
-(1, 1, '2020-01-01 01:00:02', '2020-01-01 03:29:59', 'Pour etre sûr');
-unlock tables;
+CREATE OR REPLACE VIEW vue_equipe_coach
+AS 
+SELECT 
+    e.id as id_equipe,
+    e.nom_equipe as nom_equipe,
+    p.id as id_coach,
+    p.mail as mail_coach, 
+    p.prenom as prenom_coach, 
+    p.nom as nom_coach
+FROM
+    personne as p,
+    equipe as e
+INNER JOIN
+    id
+WHERE
+    ;

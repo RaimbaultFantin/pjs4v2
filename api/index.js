@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: './api/.env' })
 
 /* Initialisation de l'app gerant l'api */
 const express = require('express')
@@ -34,4 +34,4 @@ app.use((error, req, res, next) => {
     })
 })
 
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT);
