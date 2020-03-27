@@ -23,7 +23,8 @@ export function isNameLenghtValid(value: string): boolean {
 }
 
 export function isPasswordStrongEnough(password: string): boolean {
-  if (!/[A-Z]/.test(password) && !/\d/.test(password))
+  const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  if (!passRegex.test(password))
     // eslint-disable-next-line no-throw-literal
     throw {
       name: "PasswordNotStrongEnough",

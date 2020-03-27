@@ -2,25 +2,20 @@ import React, { useState, useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { User } from "../../App";
-import {
-  setSessionCookie,
-  UserContext
-} from "../../services/context/UserContext";
+import { UserContext } from "../../services/context/UserContext";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import history from "../../services/history/history";
 import { ThemeContext } from "../../services/context/ThemeContext";
+import { setSessionCookie } from "../../services/cookies/Session";
+import axios from "axios";
 
-export interface LoginProps {
-  bddContains: (email: string, mdp: string) => User | string;
-}
+export interface LoginProps {}
 
 /**
  * Login belong to App
  */
-export default function Login(props: LoginProps) {
-  const { bddContains } = props;
-
+export default function Login() {
   const themes = useContext(ThemeContext);
 
   const useStyles = makeStyles(theme => ({
@@ -61,18 +56,19 @@ export default function Login(props: LoginProps) {
   const [currentEmail, setcurrentEmail] = useState<string>("");
   const [currentPassword, setCurrentPassword] = useState<string>("");
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     setcurrentEmail(e.currentTarget.value);
   };
 
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     e.preventDefault();
     setCurrentPassword(e.currentTarget.value);
   };
 
-  // replace by await axios ...
-  const submitLogin = (e: React.FormEvent<HTMLFormElement>): void => {
+  const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorEmail({
       display: false,
@@ -82,25 +78,26 @@ export default function Login(props: LoginProps) {
       display: false,
       message: ""
     });
-    try {
-      if (bddContains(currentEmail, currentPassword) instanceof User) {
-        const user: User = bddContains(currentEmail, currentPassword) as User;
-        setSessionCookie(user);
-        setUser(user);
+    axios
+      .post("/user/login", {
+        mail: currentEmail,
+        pass: currentPassword
+      })
+      .then(response => {
+        console.log(response);
         history.push("/home");
-      }
-    } catch (e) {
-      if (e.name === "WrongEmail")
+      })
+      .catch(error => {
+        console.log(error);
         setErrorEmail({
           display: true,
-          message: e.message
+          message: "wrong"
         });
-      if (e.name === "WrongPassword")
         setErrorPassword({
           display: true,
-          message: e.message
+          message: "wrong"
         });
-    }
+      });
   };
 
   return (
