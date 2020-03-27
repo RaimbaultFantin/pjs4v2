@@ -5,6 +5,21 @@ import { Grid, makeStyles } from "@material-ui/core";
 import Events from "../Events/Events";
 import PlanningBar from "../PlanningBar/PlanningBar";
 import { HeightContext } from "../../services/context/HeightContext";
+import { UserContext } from "../../services/context/UserContext";
+
+/**
+ * Event is a class which represente a time in the day
+ */
+export class Event {
+  public start: Date;
+  public end: Date;
+  public event: string;
+  constructor(start: Date, end: Date, event: string) {
+    this.start = start;
+    this.end = end;
+    this.event = event;
+  }
+}
 
 export default function Planning() {
   // property of Calendar
@@ -42,7 +57,18 @@ export default function Planning() {
 
   const classes = useStyles();
 
+  // State SelectedDate
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+  // a suppr
+  const debut = new Date("1995-12-17T15:30:00");
+  const fin = new Date("1995-12-17T17:30:00");
+  // fin a suppr
+
+  // State Events
+  const [events, setEvents] = useState<Array<Event>>([
+    new Event(debut, fin, "Training Foot")
+  ]);
 
   return (
     <Grid
@@ -66,9 +92,9 @@ export default function Planning() {
           />
           <Grid item xs={6}>
             <div className={classes.hauteur}>
-              <PlanningBar />
+              <PlanningBar setEvents={setEvents} />
               <Grid item xs={10} className={classes.overflow}>
-                <Events selectedDate={selectedDate} />
+                <Events events={events} selectedDate={selectedDate} />
               </Grid>
             </div>
           </Grid>

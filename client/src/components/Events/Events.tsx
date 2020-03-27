@@ -8,27 +8,15 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CardNoEvents from "../CardNoEvents/CardNoEvents";
-
-/**
- * Event is a class which represente a time in the day
- */
-class Event {
-  public start: Date;
-  public end: Date;
-  public event: string;
-  constructor(start: Date, end: Date, event: string) {
-    this.start = start;
-    this.end = end;
-    this.event = event;
-  }
-}
+import { Event } from "../Planning/Planning";
 
 interface EventsProps {
   selectedDate: Date;
+  events: Array<Event>;
 }
 
 export default function Events(props: EventsProps) {
-  const { selectedDate } = props;
+  const { selectedDate, events } = props;
 
   const useStyles = makeStyles({
     table: {
@@ -41,15 +29,6 @@ export default function Events(props: EventsProps) {
   useEffect(() => {
     console.log("from Event" + selectedDate);
   }, [selectedDate]);
-
-  // a suppr
-  const debut = new Date("1995-12-17T15:30:00");
-  const fin = new Date("1995-12-17T17:30:00");
-  // fin a suppr
-
-  const [events, setEvents] = useState<Array<Event>>([
-    new Event(debut, fin, "Training Foot")
-  ]);
 
   return (
     <div>
