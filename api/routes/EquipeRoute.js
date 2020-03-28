@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 // Recup utils erreur
 const error = require('../utils/error');
 
-router.get('/get/bypersonne', async(req, res, next) => {
+router.post('/inscription', async(req, res) => {
     var token = req.headers['authorization'];
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */
     var id = jwtUtils.checkToken(token);
@@ -21,9 +21,48 @@ router.get('/get/bypersonne', async(req, res, next) => {
     }
 
     try {
-        console.log(id);
+        /* La méthode setEquipe ajoutera aussi automatiquement l'utilisateur créant l'équipe en tant que coach de cette équipe */
+        let results = model.setEquipe(req.body.nom_equipe, req.body.id_sport, id);
+        return res.status(200).json({
+            'succes': 'Equipe crée avec succes',
+        })
+    } catch (e) {
+        return res.status(500).json(error(500, e));
+    }
+});
+
+router.get('/get/joueurs/:id', async(req, res) => {
+    var token = req.headers['authorization'];
+    /*  On stock l'identifiant de l'utilisateur contenu dans le token */
+    var id = jwtUtils.checkToken(token);
+    console.log();
+    if (id < 0) {
+        return res.status(400).json(error(400, 'Token invalide'));
+    }
+
+    try {
+        let results = await model.getJoueurs(req.params.id);
+        return res.status(200).json({
+            'succes': 'succes',
+            'datas': results
+        });
+    } catch (e) {
+        return res.status(500).json(error(500, e));
+    }
+})
+
+router.get('/get/bypersonne', async(req, res) => {
+    var token = req.headers['authorization'];
+    /*  On stock l'identifiant de l'utilisateur contenu dans le token */
+    var id = jwtUtils.checkToken(token);
+    console.log();
+    if (id < 0) {
+        return res.status(400).json(error(400, 'Token invalide'));
+    }
+
+    try {
         let results = await model.getEquipesByPersonne(id);
-        res.json(results);
+        return res.status(200).json(results);
     } catch (e) {
         /* Le message d'erreur devra renvoyer le message sql lisible et sans informations sur la BDD */
         return res.status(500).json(error(500, e));
