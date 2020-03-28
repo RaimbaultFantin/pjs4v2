@@ -31,6 +31,26 @@ router.post('/inscription', async(req, res) => {
     }
 });
 
+router.get('/get/coachs/:id', async(req, res) => {
+    var token = req.headers['authorization'];
+    /*  On stock l'identifiant de l'utilisateur contenu dans le token */
+    var id = jwtUtils.checkToken(token);
+    console.log();
+    if (id < 0) {
+        return res.status(400).json(error(400, 'Token invalide'));
+    }
+
+    try {
+        let results = await model.getCoachs(req.params.id);
+        return res.status(200).json({
+            'succes': 'succes',
+            'datas': results
+        });
+    } catch (e) {
+        return res.status(500).json(error(500, e));
+    }
+})
+
 router.get('/get/joueurs/:id', async(req, res) => {
     var token = req.headers['authorization'];
     /*  On stock l'identifiant de l'utilisateur contenu dans le token */

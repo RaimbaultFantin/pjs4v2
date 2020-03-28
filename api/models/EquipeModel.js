@@ -38,6 +38,19 @@ class EquipeModel {
         })
     }
 
+    static getCoachs = (id) => {
+        return new Promise((resolve, reject) => {
+            pool.query('SELECT * FROM `vue_equipe_coach` WHERE `id_equipe` = ?;', [id], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return reject(err);
+                } else {
+                    return resolve(results);
+                }
+            })
+        })
+    }
+
     /* Fonction de récupération de toutes les équipes d'une personne
      * Deux formes de retour possibles :
      * - resolve : les équipes
