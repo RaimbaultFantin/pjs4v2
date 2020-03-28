@@ -53,11 +53,10 @@
         android:id="@+id/btnFichier"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:layout_marginStart="24dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/fichierChat"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,7 +68,7 @@
         android:background="@drawable/emojiChat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
