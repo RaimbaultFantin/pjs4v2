@@ -26,20 +26,6 @@
                 document.body.insertBefore(p, targetDiv);
             }
         });
-        socket.emit('message',
-            {
-                room : 1,
-                idUser: 15,
-                payload: 'message1 chat 1'
-            }
-        );
-        socket.emit('message', 
-            {
-                room : 1,
-                idUser: 15,
-                payload: 'message2 chat 1'
-            }
-        )
     </script>
 </body>
 
