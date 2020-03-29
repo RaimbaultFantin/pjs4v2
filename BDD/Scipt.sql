@@ -203,44 +203,27 @@ WHERE
     s.id = e.id_sport
 GROUP BY p.id, e.id;
 
-
-CREATE OR REPLACE VIEW vue_equipe_coach
+CREATE OR REPLACE VIEW vue_equipe_joueurs
 AS
 SELECT
-    e.id as id_equipe,
+	a.id_personne as id_personne,
+    a.id_equipe as id_equipe,
     e.nom_equipe as nom_equipe,
-    p.id as id_coach,
-    p.mail as mail_coach,
-    p.prenom as prenom_coach,
-    p.nom as nom_coach
-FROM
-    personne as p,
-    equipe as e,
-    coach as c
-WHERE
-    c.id_equipe = e.id_equipe AND
-    c.id_personne = p.id;
-
-CREATE OR REPLACE VIEW vue_joueurs_equipe
-AS
-SELECT
-	a.id_personne,
-    a.id_equipe,
-    e.nom_equipe,
-	p.nom,
-    p.prenom
+	p.nom as nom_personne,
+    p.prenom as prenom_personne
 FROM appartenance AS A
 INNER JOIN personne AS P ON A.id_personne = P.id
 INNER JOIN equipe AS E ON A.id_equipe = E.id;
 
-CREATE OR REPLACE VIEW vue_coach_equipe
+
+CREATE OR REPLACE VIEW vue_equipe_coach
 AS
 SELECT
-	a.id_personne,
-    a.id_equipe,
-    e.nom_equipe,
-	p.nom,
-    p.prenom
+	C.id_personne as id_personne,
+    C.id_equipe as id_equipe,
+    e.nom_equipe as nom_equipe,
+	p.nom as nom_personne,
+    p.prenom as prenom_personne
 FROM coach AS C
 INNER JOIN personne AS P ON C.id_personne = P.id
 INNER JOIN equipe AS E ON C.id_equipe = E.id;
