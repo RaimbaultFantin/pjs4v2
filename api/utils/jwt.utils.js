@@ -18,7 +18,9 @@ module.exports = {
     },
     checkToken: function(authorization) {
         var id = -1;
-        var token = this.parseAuthorization(authorization);
+        var token = null;
+        if (authorization !== undefined)
+            var token = this.parseAuthorization(authorization);
         if (token !== null) {
             try {
                 var jwtToken = jwt.verify(token, JWT_SECRET);
