@@ -130,7 +130,7 @@ create table evenement
     id_personne int(32) not null,
     temporalite_debut datetime not null,
     temporalite_fin datetime not null,
-    texte varchar(30) default null
+    texte varchar(30) not null
 );
 
 lock table evenement write;
