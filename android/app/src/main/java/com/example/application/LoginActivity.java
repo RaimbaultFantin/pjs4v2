@@ -36,8 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = findViewById(R.id.txtLogin);
-        pass = findViewById(R.id.txtPass);
-        labelCo = findViewById(R.id.labelCo);
+        pass = findViewById(R.id.txtPassword);
 
         Button btnCo = findViewById(R.id.btnCo);
         btnCo.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("login", login.getText());
+            json.put("mail", login.getText());
             json.put("pass", pass.getText());
         } catch(JSONException e){
             e.printStackTrace();
