@@ -27,7 +27,7 @@ class EquipeModel {
 
     static getJoueurs = (id) => {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM `vue_membres_equipe` WHERE `id_equipe` = ?;', [id], (err, results) => {
+            pool.query('SELECT * FROM `vue_joueurs_equipe` WHERE `id_equipe` = ?;', [id], (err, results) => {
                 if (err) {
                     console.log(err);
                     return reject(err);

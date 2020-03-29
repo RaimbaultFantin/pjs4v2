@@ -221,7 +221,7 @@ WHERE
     c.id_equipe = e.id_equipe AND
     c.id_personne = p.id;
 
-CREATE OR REPLACE VIEW vue_membres_equipe
+CREATE OR REPLACE VIEW vue_joueurs_equipe
 AS
 SELECT
 	a.id_personne,
