@@ -64,6 +64,7 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "@types/js-cookie": "^2.2.5"
+    "@types/js-cookie": "^2.2.5",
+    "@types/react-tap-event-plugin": "0.0.30"
   }
 }

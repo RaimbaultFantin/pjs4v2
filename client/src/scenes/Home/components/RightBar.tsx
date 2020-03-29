@@ -37,13 +37,13 @@ export default function RightBar() {
 
   const classes = useStyles();
 
-  const title = useContext(CurrentTitlePageContext);
+  //const title = useContext(CurrentTitlePageContext);
 
   return (
     <AppBar classes={{ root: classes.theme }} position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          {title.title}
+          PSG
           <span role="img" aria-label="sheep">
             🥇
           </span>

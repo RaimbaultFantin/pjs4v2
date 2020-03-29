@@ -5,7 +5,7 @@ import { Grid, makeStyles } from "@material-ui/core";
 import Events from "../Events/Events";
 import PlanningBar from "../PlanningBar/PlanningBar";
 import { HeightContext } from "../../services/context/HeightContext";
-import { UserContext } from "../../services/context/UserContext";
+import { ThemeContext } from "../../services/context/ThemeContext";
 
 /**
  * Event is a class which represente a time in the day
@@ -37,6 +37,7 @@ export default function Planning() {
   // end property of Calendar
 
   const heights = useContext(HeightContext);
+  const themes = useContext(ThemeContext);
 
   const useStyles = makeStyles({
     main: {
@@ -67,7 +68,41 @@ export default function Planning() {
 
   // State Events
   const [events, setEvents] = useState<Array<Event>>([
-    new Event(debut, fin, "Training Foot")
+    new Event(
+      new Date("1995-12-17T08:30:00"),
+      new Date("1995-12-17T09:30:00"),
+      "Breakfast"
+    ),
+    new Event(
+      new Date("1995-12-17T09:30:00"),
+      new Date("1995-12-17T10:30:00"),
+      "Warm-up"
+    ),
+    new Event(
+      new Date("1995-12-17T10:30:00"),
+      new Date("1995-12-17T11:30:00"),
+      "Jogging"
+    ),
+    new Event(
+      new Date("1995-12-17T11:30:00"),
+      new Date("1995-12-17T12:30:00"),
+      "Break"
+    ),
+    new Event(
+      new Date("1995-12-17T12:30:00"),
+      new Date("1995-12-17T14:15:00"),
+      "Lunch"
+    ),
+    new Event(
+      new Date("1995-12-17T14:15:00"),
+      new Date("1995-12-17T16:15:00"),
+      "Gym"
+    ),
+    new Event(
+      new Date("1995-12-17T16:30:00"),
+      new Date("1995-12-17T19:30:00"),
+      "Training Match"
+    )
   ]);
 
   return (
@@ -89,6 +124,22 @@ export default function Planning() {
             onSelect={(date: React.SetStateAction<Date>) =>
               setSelectedDate(date)
             }
+            theme={{
+              accentColor: "#448AFF",
+              floatingNav: {
+                background: "rgba(56, 87, 138, 0.94)",
+                chevron: "#FFA726",
+                color: "#FFF"
+              },
+              headerColor: themes.darkRed,
+              selectionColor: "#bd136d",
+              textColor: {
+                active: "#FFF",
+                default: "#333"
+              },
+              todayColor: "#bd136d",
+              weekdayColor: "#bd136d"
+            }}
           />
           <Grid item xs={6}>
             <div className={classes.hauteur}>

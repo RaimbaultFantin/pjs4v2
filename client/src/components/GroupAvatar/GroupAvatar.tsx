@@ -7,7 +7,8 @@ import { makeStyles } from "@material-ui/core";
 export default function GroupAvatars() {
   const useStyles = makeStyles({
     textColor: {
-      color: "white"
+      color: "white",
+      textAlign: "center"
     },
     main: {
       margin: "auto"
@@ -19,7 +20,7 @@ export default function GroupAvatars() {
   return (
     <div className={classes.main}>
       <div className={classes.textColor}>
-        <h1>Paris-SG</h1>
+        <h1>PSG</h1>
       </div>
       <AvatarGroup>
         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />

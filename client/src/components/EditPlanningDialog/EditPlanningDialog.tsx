@@ -1,24 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import AddIcon from "@material-ui/icons/Add";
 import { green, red } from "@material-ui/core/colors";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
 import { IconButton, Grid, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker
+  KeyboardTimePicker
 } from "@material-ui/pickers";
 
 const emails = ["username@gmail.com", "user02@gmail.com"];
@@ -33,6 +24,9 @@ const useStyles = makeStyles({
   },
   margin: {
     margin: "10px"
+  },
+  red: {
+    backgroundColor: "red"
   }
 });
 
@@ -77,6 +71,7 @@ function SimpleDialog(props: SimpleDialogProps) {
               KeyboardButtonProps={{
                 "aria-label": "change time"
               }}
+              SelectProps={{ className: classes.red }}
             />
           </Grid>
           <Grid className={classes.margin} item xs={10}>
@@ -111,7 +106,7 @@ function SimpleDialog(props: SimpleDialogProps) {
   );
 }
 
-export default function EditDialog() {
+export default function EditPlanningDialog() {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 

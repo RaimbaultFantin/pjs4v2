@@ -1,22 +1,25 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import GroupAvatars from "../../../../../components/GroupAvatar/GroupAvatar";
-import PersonnalDrawer, {
-  TextPath
-} from "../../../../../components/LeftDrawer/LeftDrawer";
+import { TextPath } from "../../../../../components/LeftDrawer/LeftDrawer";
 import FolderAvatar from "../../../../../components/FolderAvatar/FolderAvatar";
-
-interface RightContentProps {}
+import RightDrawer from "../../../../../components/RightDrawer/RightDrawer";
+import AddMembersDialog from "../../../../../components/AddMembersDialog/AddMembersDialog";
+import EditMembersDialog from "../../../../../components/EditMembersDialog.tsx/EditMembersDialog";
 
 /**
  * Belong to Team
  */
 export default function RightDetails() {
-  const textItems: Array<TextPath> = [
-    new TextPath("Add members", "add-members"),
-    new TextPath("Edit Theme", "edit-theme")
+  const persons = [
+    "Fantin 👑",
+    "Benjamin",
+    "Yanis",
+    "Oliwier",
+    "Liuyi",
+    "Mariam",
+    "Fares"
   ];
-  const persons = ["Benjamin", "Yanis", "Oliwier", "Liuyi", "Mariam", "Fares"];
 
   return (
     <div>
@@ -27,7 +30,8 @@ export default function RightDetails() {
         alignItems="stretch"
       >
         <GroupAvatars />
-        <PersonnalDrawer textsItems={textItems} />
+        <AddMembersDialog />
+        <EditMembersDialog />
       </Grid>
       <FolderAvatar persons={persons} />
     </div>
