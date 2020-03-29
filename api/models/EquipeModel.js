@@ -27,9 +27,8 @@ class EquipeModel {
 
     static getJoueurs = (id) => {
         return new Promise((resolve, reject) => {
-            pool.query('SELECT * FROM `vue_joueurs_equipe` WHERE `id_equipe` = ?;', [id], (err, results) => {
+            pool.query('SELECT * FROM `vue_equipe_joueurs` WHERE `id_equipe` = ?;', [id], (err, results) => {
                 if (err) {
-                    console.log(err);
                     return reject(err);
                 } else {
                     return resolve(results);
@@ -42,7 +41,18 @@ class EquipeModel {
         return new Promise((resolve, reject) => {
             pool.query('SELECT * FROM `vue_equipe_coach` WHERE `id_equipe` = ?;', [id], (err, results) => {
                 if (err) {
-                    console.log(err);
+                    return reject(err);
+                } else {
+                    return resolve(results);
+                }
+            })
+        })
+    }
+
+    static getMembres = (id) => {
+        return new Promise((resolve, reject) => {
+            pool.query('SELECT * FROM `vue_equipe_membres` WHERE `id_equipe` = ?;', [id], (err, results) => {
+                if (err) {
                     return reject(err);
                 } else {
                     return resolve(results);
