@@ -26,12 +26,12 @@ create table personne (
 lock tables personne write;
 insert into personne
 values
-    (1, 'raimbaultfantin94@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fantin', 'Raimbault'),
-    (2, 'faresamiar1@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Fares', 'Amiar'),
-    (3, 'rabyanisrabia@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Yanis', 'Rabia'),
-    (4, 'maziarzoliwier93@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Oliwier', 'Maziarz'),
-    (5, 'pedron.benjamin@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Benjamin', 'Pedron'),
-    (6, 'amraoui.many@gmail.com', '$2b$16$6SxwCF.D9tTmorzst3y.beqA3a6I0cgEjd.UbNg0vjnNqyeh4O0WG', 'Mariam', 'Amraoui');
+    (1, 'raimbaultfantin94@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Fantin', 'Raimbault'),
+    (2, 'faresamiar1@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Fares', 'Amiar'),
+    (3, 'rabyanisrabia@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Yanis', 'Rabia'),
+    (4, 'maziarzoliwier93@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Oliwier', 'Maziarz'),
+    (5, 'pedron.benjamin@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Benjamin', 'Pedron'),
+    (6, 'amraoui.many@gmail.com', '$2b$16$rOs5dECefMmmriyM/HTQxevziULsG1X4TTxxToVaAezlCIIGT5CW2', 'Mariam', 'Amraoui');
 unlock tables;
 
 create table sport (
@@ -220,3 +220,27 @@ FROM
 WHERE
     c.id_equipe = e.id_equipe AND
     c.id_personne = p.id;
+
+CREATE OR REPLACE VIEW vue_membres_equipe
+AS
+SELECT
+	a.id_personne,
+    a.id_equipe,
+    e.nom_equipe,
+	p.nom,
+    p.prenom
+FROM appartenance AS A
+INNER JOIN personne AS P ON A.id_personne = P.id
+INNER JOIN equipe AS E ON A.id_equipe = E.id;
+
+CREATE OR REPLACE VIEW vue_coach_equipe
+AS
+SELECT
+	a.id_personne,
+    a.id_equipe,
+    e.nom_equipe,
+	p.nom,
+    p.prenom
+FROM coach AS C
+INNER JOIN personne AS P ON C.id_personne = P.id
+INNER JOIN equipe AS E ON C.id_equipe = E.id;
