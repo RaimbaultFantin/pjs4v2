@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23272A"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="135dp"
+        app:srcCompat="@drawable/MyTeam" />
+
+    <Button
+        android:id="@+id/btnJoinChat"
+        android:layout_width="101dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="223dp"
+        android:layout_marginEnd="228dp"
+        android:background="@drawable/joinChat" />
+
+    <Button
+        android:id="@+id/btnPlanning"
+        android:layout_width="101dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="238dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="72dp"
+        android:background="@drawable/Planning" />
+
+    <Button
+        android:id="@+id/btnComposition"
+        android:layout_width="101dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="227dp"
+        android:background="@drawable/Composition" />
+
+    <Button
+        android:id="@+id/btnMyAccount"
+        android:layout_width="101dp"
+        android:layout_height="111dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="238dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginEnd="72dp"
+        android:background="@drawable/myAccount" />
+
+    <Button
+        android:id="@+id/btnDeconnect"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="197dp"
+        android:layout_marginTop="562dp"
+        android:layout_marginEnd="168dp"
+        android:background="@drawable/btnDeconnect"/>
+</RelativeLayout>
