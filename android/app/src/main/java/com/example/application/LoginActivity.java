@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private void connect() {
         JSONObject jsonrequest = createJSON(login,pass);
 
-        AsyncTask<JSONObject, Void, JSONObject> task = new Login().execute(jsonrequest);
+        AsyncTask<JSONObject, Void, JSONObject> task = new LoginTask().execute(jsonrequest);
         try {
             JSONObject result = task.get();
             labelCo.setText(result.toString());
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private class Login extends AsyncTask<JSONObject, Void, JSONObject> {
+    private class LoginTask extends AsyncTask<JSONObject, Void, JSONObject> {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         String URL = "https://jsonplaceholder.typicode.com/posts";
         JSONObject jsonRep;
@@ -105,6 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return jsonRep;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+
         }
     }
 

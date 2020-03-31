@@ -1,15 +1,28 @@
 package com.example.application;
 
-public class Utilisateur {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String nom, prenom, mail, pass;
+import java.io.Serializable;
 
-    public Utilisateur(String nom, String prenom, String mail, String pass) {
+public class Utilisateur implements Serializable {
+
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    private String nom;
+    private String prenom;
+    private String mail;
+    private String pass;
+
+    public Utilisateur(String id, String nom, String prenom, String mail, String pass) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.pass = pass;
+        this.id = id;
     }
-
-
 }
