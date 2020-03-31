@@ -8,6 +8,6 @@
 
     <include
         layout="@layout/layout_accueil"
-        />
+        android:background="#23272A" />
 
 </RelativeLayout>
