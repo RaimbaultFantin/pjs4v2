@@ -1,26 +1,20 @@
 import React, { useState, useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { User } from "../../App";
-import {
-  setSessionCookie,
-  UserContext
-} from "../../services/context/UserContext";
+import { UserContext } from "../../services/context/UserContext";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import history from "../../services/history/history";
 import { ThemeContext } from "../../services/context/ThemeContext";
+import { setTokenCookie } from "../../services/cookies/Session";
+import axios from "axios";
 
-export interface LoginProps {
-  bddContains: (email: string, mdp: string) => User | string;
-}
+export interface LoginProps {}
 
 /**
  * Login belong to App
  */
-export default function Login(props: LoginProps) {
-  const { bddContains } = props;
-
+export default function Login() {
   const themes = useContext(ThemeContext);
 
   const useStyles = makeStyles(theme => ({
@@ -45,9 +39,6 @@ export default function Login(props: LoginProps) {
 
   const classes = useStyles();
 
-  // setUser for set the new Client after login successfull
-  const { setUser } = useContext(UserContext);
-
   const [errorEmail, setErrorEmail] = useState({
     display: false,
     message: ""
@@ -61,18 +52,19 @@ export default function Login(props: LoginProps) {
   const [currentEmail, setcurrentEmail] = useState<string>("");
   const [currentPassword, setCurrentPassword] = useState<string>("");
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     setcurrentEmail(e.currentTarget.value);
   };
 
-  const handlgeChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     e.preventDefault();
     setCurrentPassword(e.currentTarget.value);
   };
 
-  // replace by await axios ...
-  const submitLogin = (e: React.FormEvent<HTMLFormElement>): void => {
+  const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorEmail({
       display: false,
@@ -83,23 +75,22 @@ export default function Login(props: LoginProps) {
       message: ""
     });
     try {
-      if (bddContains(currentEmail, currentPassword) instanceof User) {
-        const user: User = bddContains(currentEmail, currentPassword) as User;
-        setSessionCookie(user);
-        setUser(user);
-        history.push("/home");
-      }
-    } catch (e) {
-      if (e.name === "WrongEmail")
-        setErrorEmail({
-          display: true,
-          message: e.message
-        });
-      if (e.name === "WrongPassword")
-        setErrorPassword({
-          display: true,
-          message: e.message
-        });
+      const response = await axios.post("/user/login", {
+        mail: currentEmail,
+        pass: currentPassword
+      });
+      // set The token in web
+      setTokenCookie(response.data.token);
+      // redirect '/home'
+    } catch (error) {
+      setErrorEmail({
+        display: true,
+        message: "Wrong"
+      });
+      setErrorPassword({
+        display: true,
+        message: "Wrong"
+      });
     }
   };
 
@@ -141,7 +132,7 @@ export default function Login(props: LoginProps) {
             helperText={errorEmail.message}
           />
           <TextField
-            onChange={handlgeChangePassword}
+            onChange={handleChangePassword}
             required={true}
             color="secondary"
             InputLabelProps={{
@@ -150,6 +141,7 @@ export default function Login(props: LoginProps) {
             InputProps={{
               className: classes.input
             }}
+            value={currentPassword}
             id="filled-basic"
             label="Password"
             type="password"

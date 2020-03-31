@@ -1,21 +1,22 @@
 import { createContext } from "react";
-import * as Cookies from "js-cookie";
-import { User } from "../../App";
-
-export const setSessionCookie = (session: User) => {
-  Cookies.remove("session");
-  Cookies.set("session", session, { expires: 14 });
-};
-
-export const getSessionCookie = (): User | null => {
-  const sessionCookie = Cookies.get("session");
-
-  if (sessionCookie === undefined) {
-    return null;
-  } else {
-    let { id, email, mdp } = JSON.parse(sessionCookie);
-    return new User(id, email, mdp);
+export class User {
+  //public id: number;
+  public email: string;
+  public firstname: string;
+  public familyname: string;
+  constructor(email: string, firstname: string, familyname: string) {
+    this.email = email;
+    this.firstname = firstname;
+    this.familyname = familyname;
   }
-};
+}
 
-export const UserContext = createContext<any>({});
+interface UserContextAttributes {
+  user: User | null;
+  setUser: (user: User) => void;
+}
+
+export const UserContext = createContext<UserContextAttributes>({
+  user: new User("", "", ""),
+  setUser: user => {}
+});

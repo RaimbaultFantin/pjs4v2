@@ -1,10 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, TextField, Button, Icon } from "@material-ui/core";
+import {
+  ListItem,
+  Grid,
+  TextField,
+  List,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Divider
+} from "@material-ui/core";
 import { ThemeContext } from "../../services/context/ThemeContext";
 import { HeightContext } from "../../services/context/HeightContext";
+import useChat from "./_useChat";
 interface ChatTeamProps {}
-
 
 export default function ChatTeam() {
   const themes = useContext(ThemeContext);
@@ -18,54 +27,68 @@ export default function ChatTeam() {
     input: {
       color: themes.white
     },
-    form: {
-      width: "100%",
-      display: "flex",
-      alignItems: "center"
-    },
     test: {
       textAlign: "center"
     }
   });
 
   const classes = useStyles();
+  // state Message Box
+  const [messageBox, setMessageBox] = useState<string>("");
+
+  const handleChangeMsgBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setMessageBox(e.currentTarget.value);
+  };
+  // useChat return his state : messages (Array of string)
+  const { messages, sendMessage } = useChat();
+
   return (
     <Grid
       className={classes.main}
       container
       direction="column"
       justify="flex-end"
-      alignItems="center"
     >
-      <form className={classes.form}>
-        <Grid xs={11} item>
-          <TextField
-            id="filled-full-width"
-            placeholder="Send a message to your team"
-            fullWidth
-            margin="normal"
-            label="🏆"
-            color="secondary"
-            InputLabelProps={{
-              shrink: true
-            }}
-            InputProps={{
-              className: classes.input
-            }}
-            variant="filled"
-            autoComplete="off"
-          />
-        </Grid>
-        <Grid item xs={1} classes={{ root: classes.test }}>
-          <Button
-            variant="contained"
-            color="primary"
-            endIcon={<Icon>send</Icon>}
-          >
-            Send
-          </Button>
-        </Grid>
-      </form>
+      {/** Messages */}
+      <List>
+        {messages.flatMap((msg, index) => [
+          <ListItem alignItems="flex-start" key={index}>
+            <ListItemAvatar>
+              <Avatar alt="Cute Kitten" src="http://placekitten.com/200/200" />
+            </ListItemAvatar>
+            <ListItemText primary={msg} />
+          </ListItem>,
+          <Divider component="li" key={"divider-" + index} variant="inset" />
+        ])}
+      </List>
+
+      {/** MessageBox */}
+      <TextField
+        value={messageBox}
+        onChange={handleChangeMsgBox}
+        onKeyDown={e => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            sendMessage(messageBox);
+            setMessageBox("");
+          }
+        }}
+        id="filled-full-width"
+        placeholder="Send a message to your team"
+        fullWidth
+        margin="normal"
+        label="🏆"
+        color="secondary"
+        InputLabelProps={{
+          shrink: true
+        }}
+        InputProps={{
+          className: classes.input
+        }}
+        variant="filled"
+        autoComplete="off"
+      />
     </Grid>
   );
 }
