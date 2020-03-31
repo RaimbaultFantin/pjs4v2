@@ -54,10 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         AsyncTask<JSONObject, Void, JSONObject> task = new LoginTask().execute(jsonrequest);
         try {
             JSONObject result = task.get();
-            labelCo.setText(result.toString());
-            /*Intent i = new Intent(LoginActivity.this,AccueilActivity.class);
-            i.putExtra("donnee", (Serializable) result);
-            startActivity(i);*/
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -82,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private class LoginTask extends AsyncTask<JSONObject, Void, JSONObject> {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        String URL = "https://jsonplaceholder.typicode.com/posts";
+        String URL = "http://localhost:5000/login";
         JSONObject jsonRep;
         @Override
         protected JSONObject doInBackground(JSONObject... jsonObjects) {
@@ -109,7 +105,20 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
+            String mail = "", nom = "", prenom = "", token = "";
+            try {
+                mail = jsonObject.getString("mail");
+                nom = jsonObject.getString("nom");
+                token = jsonObject.getString("token");
+                prenom = jsonObject.getString("prenom");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+            String password = pass.getText().toString();
+
+            Utilisateur user = new Utilisateur("id","idEquipe",nom,prenom,mail,password,token);
+            SingletonUtilisateur.initialiserSingleton(user);
         }
     }
 

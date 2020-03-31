@@ -29,7 +29,7 @@ public class Utilisateur implements Serializable {
     private String mail;
     private String pass;
 
-    public Utilisateur(String id, String idEquipe, String nom, String prenom, String mail, String pass) {
+    public Utilisateur(String id, String idEquipe, String nom, String prenom, String mail, String pass, String token) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
