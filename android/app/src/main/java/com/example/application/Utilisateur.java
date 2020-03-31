@@ -20,6 +20,11 @@ public class Utilisateur implements Serializable {
     }
 
     private String nom;
+
+    public String getPrenom() {
+        return prenom;
+    }
+
     private String prenom;
     private String mail;
     private String pass;
