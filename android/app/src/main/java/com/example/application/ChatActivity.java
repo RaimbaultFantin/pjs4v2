@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
 
         if(!connecte) {
             try {
-                socket = IO.socket("");
+                socket = IO.socket("http://localhost:5001");
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -67,7 +68,7 @@ public class ChatActivity extends AppCompatActivity {
         messageListView = findViewById(R.id.listMessages);
 
         List<Message> messages = new ArrayList<>();
-        messageAdapter = new MessageAdapter(this, R.layout.item_message, messages);
+        messageAdapter = new MessageAdapter(this, R.layout.autre_message, messages);
         messageListView.setAdapter(messageAdapter);
 
         btnEnvoyer.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +78,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(message.trim()))
                     socket.emit("message","idJoueur","idEquipe",message);
-                //else
-
+                else
+                    Toast.makeText(getApplicationContext(),"Message vide !",Toast.LENGTH_SHORT);
             }
         });
 
