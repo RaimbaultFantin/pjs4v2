@@ -1,0 +1,187 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.application"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="29"
+8-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Optional permission for App measurement to run. -->
+12-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:22:5-79
+12-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:22:22-76
+13    <uses-permission android:name="android.permission.WAKE_LOCK" />
+13-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:24:5-67
+13-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:24:22-65
+14    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+14-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:23:5-82
+14-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:23:22-79
+15
+16    <permission
+16-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:25:5-26:47
+17        android:name="com.example.application.permission.C2D_MESSAGE"
+17-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:25:17-71
+18        android:protectionLevel="signature" />
+18-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:26:9-44
+19
+20    <uses-permission android:name="com.example.application.permission.C2D_MESSAGE" />
+20-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:28:5-79
+20-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:28:22-76
+21
+22    <application
+22-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:7:5-29:19
+23        android:allowBackup="true"
+23-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:8:9-35
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.0.1] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\d903c9c030f207acfb9ad3bb1b293f19\core-1.0.1\AndroidManifest.xml:22:18-86
+25        android:debuggable="true"
+26        android:icon="@mipmap/ic_launcher"
+26-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:9:9-43
+27        android:label="@string/app_name"
+27-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:10:9-41
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:11:9-54
+29        android:supportsRtl="true"
+29-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:12:9-35
+30        android:theme="@style/AppTheme" >
+30-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:13:9-40
+31        <activity
+31-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:14:9-17:68
+32            android:name="com.example.application.RegisterActivity"
+32-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:15:13-45
+33            android:label="@string/title_activity_register"
+33-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:16:13-60
+34            android:theme="@style/AppTheme.NoActionBar" />
+34-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:17:13-56
+35        <activity
+35-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:18:9-21:59
+36            android:name="com.example.application.AccueilActivity"
+36-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:19:13-44
+37            android:label="@string/title_activity_accueil"
+37-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:20:13-59
+38            android:theme="@style/AppTheme.NoActionBar" />
+38-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:21:13-56
+39        <activity android:name="com.example.application.LoginActivity" >
+39-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:22:9-28:20
+39-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:22:19-48
+40            <intent-filter>
+40-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:23:13-27:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:24:17-69
+41-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:24:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:26:17-77
+43-->D:\Users\amiar\Documents\GitHub\pjs4v2\android\app\src\main\AndroidManifest.xml:26:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <receiver
+47-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:28:7-34:18
+48            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+48-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:29:11-83
+49            android:enabled="true" >
+49-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:30:11-33
+50            <intent-filter>
+50-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:31:9-33:25
+51                <action android:name="com.google.android.gms.measurement.UPLOAD" />
+51-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:32:11-77
+51-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:32:19-75
+52            </intent-filter>
+53        </receiver>
+54
+55        <service
+55-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:36:7-39:37
+56            android:name="com.google.android.gms.measurement.AppMeasurementService"
+56-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:37:11-82
+57            android:enabled="true"
+57-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:38:11-33
+58            android:exported="false" />
+58-->[com.google.firebase:firebase-analytics:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\8a5256009a1bda32447593a06395dfae\jetified-firebase-analytics-9.0.0\AndroidManifest.xml:39:11-35
+59
+60        <activity
+60-->[com.google.android.gms:play-services-base:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\64d66a2aa8ddd03089f50e188243bd78\jetified-play-services-base-9.0.0\AndroidManifest.xml:20:9-22:45
+61            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+61-->[com.google.android.gms:play-services-base:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\64d66a2aa8ddd03089f50e188243bd78\jetified-play-services-base-9.0.0\AndroidManifest.xml:20:19-85
+62            android:exported="false"
+62-->[com.google.android.gms:play-services-base:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\64d66a2aa8ddd03089f50e188243bd78\jetified-play-services-base-9.0.0\AndroidManifest.xml:22:19-43
+63            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+63-->[com.google.android.gms:play-services-base:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\64d66a2aa8ddd03089f50e188243bd78\jetified-play-services-base-9.0.0\AndroidManifest.xml:21:19-78
+64
+65        <receiver
+65-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:32:9-41:20
+66            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+66-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:33:13-78
+67            android:exported="true"
+67-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:34:13-36
+68            android:permission="com.google.android.c2dm.permission.SEND" >
+68-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:35:13-73
+69            <intent-filter>
+69-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:36:13-40:29
+70                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+70-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:37:17-81
+70-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:37:25-78
+71                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+71-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:38:17-86
+71-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:38:25-83
+72
+73                <category android:name="com.example.application" />
+73-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:39:17-61
+73-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:39:27-58
+74            </intent-filter>
+75        </receiver>
+76        <!--
+77 Internal (not exported) receiver used by the app to start its own exported services
+78             without risk of being spoofed.
+79        -->
+80        <receiver
+80-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:45:9-47:40
+81            android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"
+81-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:46:13-86
+82            android:exported="false" />
+82-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:47:13-37
+83        <!--
+84 FirebaseInstanceIdService performs security checks at runtime,
+85             no need for explicit permissions despite exported="true"
+86        -->
+87        <service
+87-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:51:9-57:19
+88            android:name="com.google.firebase.iid.FirebaseInstanceIdService"
+88-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:52:13-77
+89            android:exported="true" >
+89-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:53:13-36
+90            <intent-filter android:priority="-500" >
+90-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:54:13-56:29
+90-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:54:28-51
+91                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+91-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:55:17-80
+91-->[com.google.firebase:firebase-iid:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\336e50589f153fe6498e2a1b7231c031\jetified-firebase-iid-9.0.0\AndroidManifest.xml:55:25-77
+92            </intent-filter>
+93        </service>
+94
+95        <provider
+95-->[com.google.firebase:firebase-common:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\0a63d17f2e1a422dfc240af5a89dd00c\jetified-firebase-common-9.0.0\AndroidManifest.xml:7:9-11:39
+96            android:name="com.google.firebase.provider.FirebaseInitProvider"
+96-->[com.google.firebase:firebase-common:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\0a63d17f2e1a422dfc240af5a89dd00c\jetified-firebase-common-9.0.0\AndroidManifest.xml:9:13-58
+97            android:authorities="com.example.application.firebaseinitprovider"
+97-->[com.google.firebase:firebase-common:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\0a63d17f2e1a422dfc240af5a89dd00c\jetified-firebase-common-9.0.0\AndroidManifest.xml:8:13-72
+98            android:exported="false"
+98-->[com.google.firebase:firebase-common:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\0a63d17f2e1a422dfc240af5a89dd00c\jetified-firebase-common-9.0.0\AndroidManifest.xml:10:13-37
+99            android:initOrder="100" />
+99-->[com.google.firebase:firebase-common:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\0a63d17f2e1a422dfc240af5a89dd00c\jetified-firebase-common-9.0.0\AndroidManifest.xml:11:13-36
+100
+101        <meta-data
+101-->[com.google.android.gms:play-services-basement:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\5e46dce2b3e2f4dbda8ac9f24854d46f\jetified-play-services-basement-9.0.0\AndroidManifest.xml:21:9-23:69
+102            android:name="com.google.android.gms.version"
+102-->[com.google.android.gms:play-services-basement:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\5e46dce2b3e2f4dbda8ac9f24854d46f\jetified-play-services-basement-9.0.0\AndroidManifest.xml:22:13-58
+103            android:value="@integer/google_play_services_version" />
+103-->[com.google.android.gms:play-services-basement:9.0.0] C:\Users\amiar\.gradle\caches\transforms-2\files-2.1\5e46dce2b3e2f4dbda8ac9f24854d46f\jetified-play-services-basement-9.0.0\AndroidManifest.xml:23:13-66
+104    </application>
+105
+106</manifest>

@@ -15,11 +15,17 @@ import Team from "./components/Team/Team";
 import CreateTeam from "./components/CreateTeam";
 import JoinTeam from "./components/JoinTeam";
 import { CurrentTitlePageContext } from "../../services/context/CurrentTitlePageContext";
+import axios from "axios";
+import { TokenContext } from "../../services/context/TokenContext";
+import { User, UserContext } from "../../services/context/UserContext";
 
 /**
  * Home belong to App
  */
 export default function Home() {
+  /** HEIGHTS */
+
+  // state screen height
   const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight);
 
   const updateHeight = () => {
@@ -32,18 +38,14 @@ export default function Home() {
     bottomnav: 56
   };
 
-  const [title, setTitle] = useState<string>("Home");
-
-  const currentTitlePage = {
-    title,
-    setTitle
-  };
-
+  // Screen size
   useEffect(() => {
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   });
+  /** END HEIGHTS */
 
+  /** STYLE & THEMES */
   const themes = useContext(ThemeContext);
 
   const useStyles = makeStyles({
@@ -64,63 +66,125 @@ export default function Home() {
   });
 
   const classes = useStyles();
+  /** END STYLE & THEMES */
 
-  const { path } = useRouteMatch();
+  /** CURRENT TITLE PAGE */
+
+  // state title current page
+  const [title, setTitle] = useState<string>("Home");
+
+  const currentTitlePage = {
+    title,
+    setTitle
+  };
+  /** END CURRENT TITLE PAGE */
+
+  // token context
+  const { token } = useContext(TokenContext);
+
+  /** Current User */
+
+  // state user logged
+  const [user, setUser] = useState<User | null>(null);
+
+  const currentUser = {
+    user,
+    setUser
+  };
+
+  // get user logged
+  const getUser = async () => {
+    try {
+      const response = await axios.get("/user/get", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const { mail, prenom, nom } = response.data;
+      setUser(new User(mail, prenom, nom));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // get teams
+  const getTeams = async () => {
+    try {
+      const response = await axios.get("/equipe/get/bypersonne", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const { mail, prenom, nom } = response.data;
+      setUser(new User(mail, prenom, nom));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const textItems: Array<TextPath> = [
     new TextPath("Create a Team", "create-team"),
     new TextPath("Join a Team", "join-team")
   ];
-  const textDropDown: string = "My Teams";
+
+  // teams and urls
   const textsItemsDropDown: Array<TextPath> = [
     new TextPath("Paris-SG", "t/psg"),
     new TextPath("Bayern", "t/bayern"),
     new TextPath("Liverpool", "t/liverpool")
   ];
 
+  const { path } = useRouteMatch();
+
   return (
-    <CurrentTitlePageContext.Provider value={currentTitlePage}>
-      <HeightContext.Provider value={heights}>
-        <Grid className={classes.fullscreen} container>
-          <Grid classes={{ root: classes.leftSize }} item xs={2}>
-            <LeftBar />
-            <PersonnalDrawer
-              dropDown={true}
-              textDropDown={textDropDown}
-              textsItems={textItems}
-              textsItemsDropDown={textsItemsDropDown}
-            />
-          </Grid>
-          <Grid classes={{ root: classes.middleSide }} item xs={10}>
-            <Grid container>
-              <RightBar />
-              {/** regex for Welcome message : "!/home/anythingelse" : false */}
-              <Grid item xs={10}>
-                {!/\/home\/[^\n]+/.test(window.location.pathname) ? (
-                  <Welcome />
-                ) : (
-                  <div />
-                )}
+    <UserContext.Provider value={currentUser}>
+      <CurrentTitlePageContext.Provider value={currentTitlePage}>
+        <HeightContext.Provider value={heights}>
+          <Grid className={classes.fullscreen} container>
+            <Grid classes={{ root: classes.leftSize }} item xs={2}>
+              <LeftBar />
+              <PersonnalDrawer
+                dropDown={true}
+                textDropDown={"My Teams"}
+                textsItems={textItems}
+                textsItemsDropDown={textsItemsDropDown}
+              />
+            </Grid>
+            <Grid classes={{ root: classes.middleSide }} item xs={10}>
+              <Grid container>
+                <RightBar />
+                {/** regex for Welcome message : "!/home/anythingelse" : false */}
+                <Grid item xs={10}>
+                  {!/\/home\/[^\n]+/.test(window.location.pathname) ? (
+                    <Welcome />
+                  ) : (
+                    <div />
+                  )}
+                </Grid>
+
+                {/** Show a selected Team */}
+                <Route path={path + "/t/:idTeam"}>
+                  <Team />
+                </Route>
+
+                {/** Show create team page */}
+                <Route exact path={path + "/create-team"}>
+                  <CreateTeam />
+                </Route>
+
+                {/** Show join team invitation(s) */}
+                <Route exact path={path + "/join-team"}>
+                  <JoinTeam />
+                </Route>
               </Grid>
-
-              {/** Show a selected Team */}
-              <Route path={path + "/t/:idTeam"}>
-                <Team />
-              </Route>
-
-              {/** Show create team page */}
-              <Route exact path={path + "/create-team"}>
-                <CreateTeam />
-              </Route>
-
-              {/** Show join team invitation(s) */}
-              <Route exact path={path + "/join-team"}>
-                <JoinTeam />
-              </Route>
             </Grid>
           </Grid>
-        </Grid>
-      </HeightContext.Provider>
-    </CurrentTitlePageContext.Provider>
+        </HeightContext.Provider>
+      </CurrentTitlePageContext.Provider>
+    </UserContext.Provider>
   );
 }
