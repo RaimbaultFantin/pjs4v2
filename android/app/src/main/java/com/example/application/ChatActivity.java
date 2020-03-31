@@ -77,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
                 String message = txtMessage.getText().toString();
 
                 if(TextUtils.isEmpty(message.trim()))
-                    socket.emit("message","idJoueur","idEquipe",message);
+                    socket.emit("message",user.getId(),user.getIdEquipe(),message);
                 else
                     Toast.makeText(getApplicationContext(),"Message vide !",Toast.LENGTH_SHORT);
             }
@@ -95,6 +95,7 @@ public class ChatActivity extends AppCompatActivity {
                     String username;
                     String message;
                     String id;
+
                     try {
                         username = data.getString("username");
                         message = data.getString("message");
