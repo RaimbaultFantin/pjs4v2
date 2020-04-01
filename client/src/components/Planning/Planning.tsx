@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import InfiniteCalendar from "react-infinite-calendar";
 import "react-infinite-calendar/styles.css"; // only needs to be imported once
 import { Grid, makeStyles } from "@material-ui/core";
-import DenseTable from "../DenseTable/DenseTable";
+import Events from "../Events/Events";
 import DenseAppBar from "../DenseAppBar/DenseAppBar";
 import { HeightContext } from "../../services/context/HeightContext";
 
@@ -31,7 +31,7 @@ export default function Planning() {
       height: "100%"
     },
     hauteur: {
-      height: 651,
+      height: 500,
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -55,13 +55,14 @@ export default function Planning() {
             minDate={lastWeek}
             min={lastWeek}
             max={nextMonth}
-            height={"auto"}
+            height={500}
+            //onSelect={(date: any) => console.log(date)}
           />
           <Grid item xs={6}>
             <div className={classes.hauteur}>
               <DenseAppBar />
-              <Grid xs={10} className={classes.overflow}>
-                <DenseTable />
+              <Grid item xs={10} className={classes.overflow}>
+                <Events selectedDate={today} />
               </Grid>
             </div>
           </Grid>

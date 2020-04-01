@@ -10,6 +10,8 @@ import {
   isPasswordStrongEnough,
   isNameLenghtValid
 } from "../../services/utils/verifRegister";
+import axios from "axios";
+import history from "../../services/history/history";
 
 interface InputState {
   value: string;
@@ -224,17 +226,20 @@ export default function Register() {
   // replace by await axios ...
   const submitLogin = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(
-      email.value +
-        " " +
-        familyName.value +
-        " " +
-        firstName.value +
-        " " +
-        password.value +
-        " " +
-        confirmPassword.value
-    );
+    axios
+      .post("/user/inscription", {
+        mail: email.value,
+        pass: password.value,
+        nom: familyName.value,
+        prenom: firstName.value
+      })
+      .then(response => {
+        console.log(response);
+        history.push("/home");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
